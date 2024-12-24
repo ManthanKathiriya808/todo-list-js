@@ -8,6 +8,17 @@ let data = [
 
 let tbody =document.getElementById("tbody")
 
+
+document.getElementById("search").addEventListener("keyup",function(e){
+
+   let val = e.target.value.toUpperCase()
+
+   let searchData = data.filter((ele) => !ele.list.toUpperCase().indexOf(val))
+
+
+   showData(searchData)
+})
+
 document.getElementById("form").addEventListener("submit",function(e){
   e.preventDefault();
    let id = document.getElementById("id").value
@@ -26,7 +37,10 @@ document.getElementById("form").addEventListener("submit",function(e){
             }
             return ele
         })
-        showData(updateData)
+
+        localStorage.setItem("data",JSON.stringify(updateData))
+        data = JSON.parse(localStorage.getItem("data"))
+        showData(data)
 
     }
   
@@ -41,6 +55,9 @@ document.getElementById("form").addEventListener("submit",function(e){
     }
 
     data.push(obj)
+
+    localStorage.setItem("data",JSON.stringify(data))
+    data = JSON.parse(localStorage.getItem("data"))
     showData(data)
     }
 
@@ -72,8 +89,11 @@ function dele(id){
 
     let deleData = data.filter((ele) => ele.id !=id)
 
-    data = deleData
-    showData(deleData)
+   
+    localStorage.setItem("data",JSON.stringify(deleData))
+    data = JSON.parse(localStorage.getItem("data"))
+    
+    showData(data)
 }
 
 function check(id){
@@ -84,7 +104,9 @@ function check(id){
          return ele;
     })
     
-     showData(statusData);
+
+    localStorage.setItem("data",JSON.stringify(statusData))
+     showData(JSON.parse(localStorage.getItem("data")));
     
     console.log(statusData)
     }
@@ -103,6 +125,9 @@ function update(id){
     // document.getElementById("todo_list").value =""
     // document.getElementById("id").value = ""
 }
+
+
+data = JSON.parse(localStorage.getItem("data"))
 
 function showData(data){
     tbody.innerHTML=""
