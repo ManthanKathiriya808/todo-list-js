@@ -177,9 +177,16 @@ setInterval( function(){
 
 let time = new Date()
 document.getElementById("time").innerHTML = `
- ${time.getHours()}
-${time.getMinutes()}
+ ${time.getHours()} :
+${time.getMinutes()} :
 ${time.getSeconds()}
 `
 },1000
 )
+
+
+
+
+
+
+
