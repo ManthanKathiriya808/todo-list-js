@@ -128,21 +128,22 @@ function moreCanvas(id){
 
     let subdatas = data.filter((ele) => ele.id == id)
 console.log(subdatas)
-    document.getElementsByClassName("offcanvas").innerHTML = ""
+    document.querySelector(".offcanvas").innerHTML = ""
 
     subdatas.map((ele) => {
-        document.getElementsByClassName("offcanvas").innerHTML += `
+        document.querySelector(".offcanvas").innerHTML = `
               <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="staticBackdropLabel">More Information</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
     <div>
+    <h4>
      <ul>
-        <li>${ele.list}</li>
-        <li>${ele.status}</li>
+        <li>Work : ${ele.list}</li>
+        <li>Status : ${ele.status}</li>
   
-     </ul>
+     </ul></h4>
     </div>        
         `
     })
@@ -167,7 +168,7 @@ function showData(data){
                             <td><button onclick="update(${ele.id})" class="btn btn-yellow fs-2" ><i class="ri-ball-pen-line"></i></button></td>
                             <td><button onclick="dele(${ele.id})" class="btn btn-red fs-2" ><i class="ri-close-large-line"></i></i></button></td>
                             <td>
-                            <button class="btn fs-2 btn-blue" onclick="moreCanvas(${ele.id})" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">⁝</button></td>
+                            <button class="btn fs-2 btn-blue" onclick="moreCanvas(${ele.id})" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="offcanvasWithBothOptions">⁝</button></td>
                         </tr>
         `
     })
@@ -192,7 +193,7 @@ data.map((ele) => {
                         <td><button onclick="update(${ele.id})" class="btn btn-yellow fs-2" ><i class="ri-ball-pen-line"></i></button></td>
                         <td><button onclick="dele(${ele.id})" class="btn btn-red fs-2" ><i class="ri-close-large-line"></i></i></button></td>
      <td>
-                            <button class="btn fs-2 btn-blue" onclick="moreCanvas(${ele.id})" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">⁝</button></td>
+                            <button class="btn fs-2 btn-blue" onclick="moreCanvas(${ele.id})" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="offcanvasWithBothOptions">⁝</button></td>
                     </tr>
     `
 })
