@@ -127,8 +127,6 @@ function update(id){
 }
 
 
-data = JSON.parse(localStorage.getItem("data"))
-
 function showData(data){
     tbody.innerHTML=""
 
