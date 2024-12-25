@@ -1,9 +1,5 @@
 let data = [
-    {
-        "id": 1,
-        "list":"Todo Listy",
-        "status": false
-    }
+   
 ]
 
 let tbody =document.getElementById("tbody")
@@ -51,7 +47,8 @@ document.getElementById("form").addEventListener("submit",function(e){
     let obj = {
         "id": Math.round(num*1000),
         "list": todo_list,
-        "status": false
+        "status": false,
+        "time": Date()
     }
 
     data.push(obj)
@@ -66,24 +63,22 @@ document.getElementById("id").value =""
     document.getElementById("todo_list").value =""                
 })
 
-function lname(){
-    let subproduct = data.sort((a,b) => a.id - b.id)
-    showData(subproduct)
-}
+// function lname(){
+//     let subproduct = data.sort((a,b) => a.id - b.id)
+//     showData(subproduct)
+// }
 function complete(){
     let subproduct = data.filter((ele) => ele.status == true)
-
     showData(subproduct)
 }
 function ncomplete(){
     let subproduct = data.filter((ele) => ele.status != true)
-
     showData(subproduct)
 }
-function hname(){
-    let subproduct = data.sort((b,a) => b.id - a.id)
-    showData(subproduct)
-}
+// function hname(){
+//     let subproduct = data.sort((b,a) => b.id - a.id)
+//     showData(subproduct)
+// }
 
 function dele(id){
 
@@ -127,6 +122,34 @@ function update(id){
 }
 
 
+function moreCanvas(id){
+
+     data = JSON.parse(localStorage.getItem("data"))
+
+    let subdatas = data.filter((ele) => ele.id == id)
+console.log(subdatas)
+    document.getElementsByClassName("offcanvas").innerHTML = ""
+
+    subdatas.map((ele) => {
+        document.getElementsByClassName("offcanvas").innerHTML += `
+              <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="staticBackdropLabel">More Information</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div>
+     <ul>
+        <li>${ele.list}</li>
+        <li>${ele.status}</li>
+  
+     </ul>
+    </div>        
+        `
+    })
+
+}
+
+
 function showData(data){
     tbody.innerHTML=""
 
@@ -143,6 +166,8 @@ function showData(data){
                             <td>${ele.list}</td>
                             <td><button onclick="update(${ele.id})" class="btn btn-yellow fs-2" ><i class="ri-ball-pen-line"></i></button></td>
                             <td><button onclick="dele(${ele.id})" class="btn btn-red fs-2" ><i class="ri-close-large-line"></i></i></button></td>
+                            <td>
+                            <button class="btn fs-2 btn-blue" onclick="moreCanvas(${ele.id})" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">⁝</button></td>
                         </tr>
         `
     })
@@ -159,12 +184,15 @@ data.map((ele) => {
           <tr class="  fs-4     ${ele.status ? 'table-success ' : 'table-danger' }" id="box">
                      
 <td class="" >
+
 <input id="stat" onchange="check(${ele.id})" value="true" type="checkbox" ${ele.status ? "checked" : ""} class="status1 " />
 
 </td>
                         <td>${ele.list}</td>
                         <td><button onclick="update(${ele.id})" class="btn btn-yellow fs-2" ><i class="ri-ball-pen-line"></i></button></td>
                         <td><button onclick="dele(${ele.id})" class="btn btn-red fs-2" ><i class="ri-close-large-line"></i></i></button></td>
+     <td>
+                            <button class="btn fs-2 btn-blue" onclick="moreCanvas(${ele.id})" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">⁝</button></td>
                     </tr>
     `
 })
