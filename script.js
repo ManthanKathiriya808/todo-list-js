@@ -152,6 +152,7 @@ function showData(data){
 
 
 
+data = JSON.parse(localStorage.getItem("data")) || []
 
 data.map((ele) => {
 
